@@ -1,0 +1,101 @@
+﻿@model Bar.Login
+
+@{ Layout = "";
+    ViewBag.Title = "About";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero-image {
+            background-image: url('../../Photos/darkbar.jpg');
+            background-color: #cccccc;
+            height: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #2757a5;
+            text-shadow: 2px 2px white;
+        }
+
+
+        .button2 {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #eaf0fa;
+            background-color: #5a8ad8;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #2757a5;
+            width: 400px;
+        }
+
+            .button2:hover {
+                background-color: #2757a5
+            }
+
+            .button2:active {
+                background-color: #2757a5;
+                box-shadow: 0 5px #2757a5;
+                transform: translateY(4px);
+            }
+    </style>
+</head>
+
+<body class="hero-image">
+
+
+    <div class="hero-text">
+        @using (Html.BeginForm("LoginB", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken() // this is for prevent CSRF attack
+            @Html.ValidationSummary(true)
+
+
+
+
+            <h1 style="font-size:100px">Welcome, Please Input ID</h1>
+            if (@ViewBag.Message != null)
+            {
+                <div style="border: 1px solid red; color:red;font-size:50px">
+                    @ViewBag.Message
+                </div>
+            }
+            @Html.TextBoxFor(a => a.BartenderID, new { style = " width:500px; font-size:40px" })
+            @Html.ValidationMessageFor(a => a.BartenderID)
+
+            <p></p> <input type="submit" class="button2" name="submit" value="Login" />
+        }
+
+        <p><button class="button2" style="width: 200px;" onclick="location.href='@Url.Action("/Index")'">Home Page</button></p>
+    </div>
+
+
+
+</body>
+</html>
