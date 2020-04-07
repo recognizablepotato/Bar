@@ -1,0 +1,248 @@
+﻿@model Bar.Order
+@{
+
+    Layout = "";
+    ViewBag.Title = "Customer";
+}
+
+<html>
+<head>
+    <script type="text/javascript" language="javascript">
+        function ConfirmOrder() {
+            var r = confirm("Please Confirm you would like to Complete your Purchase")
+            if (r == true)
+                return true;
+            else
+                return false;
+
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero-image {
+            background-image: url('../../Photos/darkbar.jpg');
+            background-color: black;
+            height: 120%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: relative;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ac3973;
+            text-shadow: 2px 2px white;
+        }
+
+        .b {
+            background-image: url('../../Photos/Blue_lagoonsm.jpg');
+            text-shadow: 2px 2px black;
+        }
+
+        .a, .b, .c, .d, .e, .f {
+            background-position: center;
+            background-repeat: no-repeat;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 25px;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #f9ecf9;
+            background-color: #d279d2;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 5px #ac3973;
+            width: 200px;
+            height: 200px
+        }
+
+        .a {
+            background-image: url('../../Photos/Baileysm.jpg');
+            text-shadow: 2px 2px orangered;
+        }
+
+        .c {
+            background-image: url('../../Photos/margaritasm.png');
+            text-shadow: 2px 2px white;
+            color: black;
+        }
+
+        .d {
+            background-image: url('../../Photos/long_islandsm.png');
+            text-shadow: 2px 2px black;
+            width: 290px;
+            height: 200px
+        }
+
+        .e {
+            background-image: url('../../Photos/martinism.png');
+            text-shadow: 2px 2px white;
+            color: black;
+        }
+
+        .f {
+            background-image: url('../../Photos/pina_coloadasm.png');
+            text-shadow: 2px 2px black;
+        }
+
+            .a:hover, .b:hover, .c:hover, .d:hover, .e:hover, .f:hover {
+                background-color: #ac3973
+            }
+
+
+            .a:active, .b:active, .c:active, .d:active, .e:active, .f:active {
+                background-color: #d279d2;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+
+        .button2 {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #eaf0fa;
+            background-color: #ac3973;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #eaf0fa;
+            width: 400px;
+        }
+
+            .button2:hover {
+                background-color: #cc6699
+            }
+
+            .button2:active {
+                background-color: #cc6699;
+                box-shadow: 0 5px #ac3973;
+                transform: translateY(4px);
+            }
+    </style>
+</head>
+<body class="hero-image">
+
+
+    <div class="hero-text">
+
+        <h1 style="font-size:80px">What Would you like to Drink?</h1>
+
+        <table align="center">
+
+            <tr>
+                <th><button class="a">Baileys<br /> $8</button></th>
+                <th><button class="b">Blue Lagoon<br /> $10</button></th>
+                <th><button class="c">Margarita<br /> $9</button></th>
+                <th><button class="d">Long Island Iced Tea<br /> $8</button></th>
+                <th><button class="e">Martini<br /> $9</button></th>
+                <th><button class="f">Pina Coloda<br /> $10</button></th>
+            </tr>
+            <tr>
+                <td style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white; padding-left: 20px;">Quantity</td>
+                <td style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white; padding-left: 20px;">Quantity</td>
+                <td style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white; padding-left: 20px;">Quantity</td>
+                <td style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white; padding-left: 50px;">Quantity</td>
+                <td style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white; padding-left: 20px;">Quantity</td>
+                <td style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white; padding-left: 20px;">Quantity</td>
+
+            </tr>
+            @using (Html.BeginForm("Creation1", "Home", FormMethod.Post))
+            {@Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <tr>
+
+                @Html.HiddenFor(model => model.Customer.OrderID,
+                new {  Value = ViewBag.Msg })
+
+                @Html.HiddenFor(model => model.Customer.Status,
+                new { Value = ViewBag.Status })
+                <td>
+                    @Html.HiddenFor(model => model.OrderID,
+                new { Value = ViewBag.Msg })
+                    @Html.HiddenFor(model => model.Name, new { Value = ViewBag.Drink1 })
+
+                    @Html.HiddenFor(model => model.Quantity, new { Value = 0 })
+                    @Html.TextBox("Search", null, new { style = "width:50px;font-size:40px" })
+                    
+                    @Html.HiddenFor(model => model.PK, new { Value = ViewBag.PKvalue })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.OrderID,
+                new { Value = ViewBag.Msg })
+                    @Html.HiddenFor(model => model.Name, new { Value = ViewBag.Drink2 })
+
+                    @Html.HiddenFor(model => model.Quantity, new { Value = 0 })
+                    @Html.TextBox("Search1", null, new { style = "width:50px;font-size:40px" })
+                    @Html.HiddenFor(model => model.PK, new { Value = ViewBag.PKvalue + 1 })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.OrderID,
+                new { Value = ViewBag.Msg })
+                    @Html.HiddenFor(model => model.Name, new { Value = ViewBag.Drink3 })
+                    @Html.HiddenFor(model => model.Quantity, new { Value = 0 })
+
+                    @Html.TextBox("Search2", null, new { style = "width:50px;font-size:40px" })
+                    @Html.HiddenFor(model => model.PK, new { Value = ViewBag.PKvalue + 1 })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.OrderID,
+                new { Value = ViewBag.Msg })
+                    @Html.HiddenFor(model => model.Name, new { Value = ViewBag.Drink4 })
+                    @Html.HiddenFor(model => model.Quantity, new { Value = 0 })
+
+                    @Html.TextBox("Search3", null, new { style = "width:50px;font-size:40px" })
+                    @Html.HiddenFor(model => model.PK, new { Value = ViewBag.PKvalue + 1 })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.OrderID,
+                new { Value = ViewBag.Msg })
+                    @Html.HiddenFor(model => model.Name, new { Value = ViewBag.Drink5 })
+                    @Html.HiddenFor(model => model.Quantity, new { Value = 0 })
+
+                    @Html.TextBox("Search4", null, new { style = "width:50px;font-size:40px" })
+                    @Html.HiddenFor(model => model.PK, new { Value = ViewBag.PKvalue + 1 })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.OrderID,
+                new { Value = ViewBag.Msg })
+                    @Html.HiddenFor(model => model.Name, new { Value = ViewBag.Drink6 })
+                    @Html.HiddenFor(model => model.Quantity, new { Value = 0 })
+
+                    @Html.TextBox("Search5", null, new { style = "width:50px;font-size:40px" })
+                    @Html.HiddenFor(model => model.PK, new { Value = ViewBag.PKvalue + 1 })
+                </td>
+
+            </tr>
+            <tr>
+
+                <td colspan="6" style="font-size:40px;color: #ac3973;text-shadow: 2px 2px white">
+                    Enter the Name for the Order:
+
+                    @Html.EditorFor(model => model.Customer.OrderName, new { htmlAttributes = new { @class = "form -control", style = "width:500px;font-size:40px" } })
+                    @Html.ValidationMessageFor(model => model.Customer.OrderName)
+</tr>
+            <tr><td colspan="6"><input type="submit" class="button2" style="margin-left:480px" name="submit" value="Submit" OnClick="return ConfirmOrder()" /></td></tr>
+        }
+        </table>
+
+        <p><button class="button2" style="width: 200px;" onclick="location.href='@Url.Action("Index")'">Home Page</button></p>
+    </div>
+
+
+</body>
+</html>
