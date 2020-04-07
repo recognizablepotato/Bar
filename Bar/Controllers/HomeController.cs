@@ -134,7 +134,7 @@ namespace Bar.Controllers
 
                 return View(myModel.ToList());
 
-
+                //rules
             }
             else
             {
